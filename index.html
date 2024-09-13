@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>グローバルコミュニティ</title>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+        <!-- コンテンツ表示画面 -->
+        <header>
+            <div class="container">
+              <div class="header-left">
+                <img class="logo" src="img/logo.png">
+              </div>
+              <div class="header-right">
+                <a href="#" class="login">LOGIN</a>
+              </div>
+            </div>
+          </header>
+
+          <div class="top-wrapper">
+            <div class="container">
+              <h1>EXPAND YOUR POTENTIAL</h1>
+              <h1>CONNECT WITH THE WORLD</h1>
+              <p>The STYLE INSIGHTは、時間や場所にとらわれない、自分らしい働き方＆生き方を実現するグローバルコミュニティです。</p>
+              <p>国境や性別、年齢に関係なく、あなたの未来の可能性を仲間と広げていきましょう！</p>
+              <div class="btn-wrapper">
+                <a href="#" class="btn signup">新規登録はこちら</a>
+                <p>or sign up with</p>
+                <a href="#" class="btn facebook"><span class="fa fa-facebook"></span>Facebookで登録</a>
+                <a href="#" class="btn twitter"><span class="fa fa-twitter"></span>Xで登録</a>
+              </div>
+            </div>
+          </div>
+          <div class="lesson-wrapper">
+            <div class="container">
+              <div class="heading">
+                <h2>こんな人におすすめです!</h2>
+              </div>
+              <div class="lessons">
+                <div class="lesson">
+                  <div class="lesson-icon">
+                    <img src="img/img1.png">
+                  </div>
+                  <p class="txt-contents">起業家に必要な専門家と連携したい<br>パートナーやファンを形成したい<br>異業種の信頼できる人と繋がりたい</p>
+                </div>
+                <div class="lesson">
+                  <div class="lesson-icon">
+                    <img src="img/img2.png">
+                  </div>
+                  <p class="txt-contents">社会的影響力のある仕事がしたい<br>スキルシェアで自分のチカラを試したい<br>チームでPJを進めたい</p>
+                  </div>
+                <div class="lesson">
+                  <div class="lesson-icon">
+                    <img src="img/img3.png">
+                  </div>
+                  <p class="txt-contents">狭い世界に捉われず視野を広げたい<br>自分の能力の本質的価値を確かめたい<br>自立して稼ぐ体験をしたい</p>
+                </div>
+                <div class="lesson">
+                  <div class="lesson-icon">
+                    <img src="img/img4.png">
+                  </div>
+                  <p class="txt-contents">他ジャンルと繋がり感性を広げたい<br>活動をPRやビジネスに繋げたい<br>社会や市場の変化に敏感でいたい</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="message-wrapper">
+            <div class="container">
+              <div class="heading">
+                <h2>さぁ、あなたもグローバルコミュニティで世界観を広げてみませんか?</h2>
+                <!-- <h3>気になった方は下記にてお申し込みください！</h3> -->
+              </div>
+              <a href="#" class="btn message">コミュニティに参加する</a>
+            </div>
+          </div>
+
+
+        <!-- DeepLの表示 -->
+        <h2>英語翻訳機能はこちら</h2>
+        
+        <div class="container_dl">
+          <div class="translator-box">
+            <!-- <div class="word-count"> -->
+              <!-- <span id="input-count">0</span>字 -->
+              <!-- <span id="remaining-count">残り 500字</span> -->
+            <!-- </div> -->
+      
+            <textarea id="deepl-input" class="input-box" placeholder="ここにテキストを入力してください"></textarea>
+      
+            <!-- <button class="close-btn" onclick="clearText()">×</button> -->
+      
+            <textarea id="deepl-output" class="output-box" placeholder="翻訳結果がここに表示されます"></textarea>
+      
+            <div class="word-count">
+              <span id="output-count">0</span> words
+            </div>
+      
+            <button id="translate-btn" class="copy-btn" onclick="deeplTranslate()">翻訳</button>
+          </div>
+        </div>
+      
+
+
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- JQuery -->
+ 
+
+
+<!-- JavaScriptファイルの読み込み -->
+<!-- <script type="module" src="js/config.js"></script> -->
+<!-- <script type="module" src="js/script.js"></script> -->
+
+<!-- <script src="js/config.js"></script> -->
+<!-- <script src="js/script.js"></script> -->
+
+<!-- <script src="config.js"></script> -->
+
+<!--** 以下Firebase **-->
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+            import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved } 
+            from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+          
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+              apiKey: "*****",
+              authDomain: "*****",
+              projectId: "*****",
+              storageBucket: "*****",
+              messagingSenderId: "*****",
+              appId: "*****"
+            };
+          
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+
+// *********************************************************
+
+const API_KEY = 'df13b01e-a728-45c7-9307-ad4f857a405f:fx';
+const API_URL = 'https://api-free.deepl.com/v2/translate';
+
+
+window.deeplTranslate = function () {
+    let deeplInput = document.getElementById("deepl-input").value;
+    let isJapanese = false;
+    let sourceLang = "";
+
+    if (deeplInput === "") {
+        alert("翻訳するテキストを入力してください");
+        return;
+    }
+
+    // 言語判別（日本語か英語か）
+    for (let i = 0; i < deeplInput.length; i++) {
+    if (deeplInput.charCodeAt(i) >= 256) {
+            isJapanese = true;
+            break;
+        }
+    }
+
+    sourceLang = isJapanese ? 'JA' : 'EN';
+    const targetLang = isJapanese ? 'EN' : 'JA';
+
+    let content = `auth_key=${API_KEY}&text=${encodeURIComponent(deeplInput)}&source_lang=${sourceLang}&target_lang=${targetLang}`;
+    let url = `${API_URL}?${content}`;
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        }
+    })
+    .then(function(response) {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error("APIに接続できません: " + response.statusText);
+        }
+    })
+    .then(function(data) {
+        document.getElementById("deepl-output").value = data.translations[0].text;
+    })
+    .catch(function(error) {
+        alert("翻訳に失敗しました: " + error.message);
+    });
+}
+
+function clearText() {
+    document.getElementById("deepl-input").value = '';
+    document.getElementById("deepl-output").value = '';
+}
+</script>
+    
+
+</body>
+</html>
